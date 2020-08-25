@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+<!-- content -->
+{% block content %}
+
+<h1>{{ weibo.title }}</h1>
+<hr />
+<p>
+  {{ weibo.content }}
+</p>
+
+<a href="/weibof/delete?wid={{ weibo.id }}"><button value="删除文章"></button></a>
+{% endblock %}

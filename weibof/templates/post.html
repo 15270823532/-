@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+<!-- content -->
+{% block content %}
+
+<form action="/weibof/post" method="POST">
+  标题：<input type="text" name="title" />
+  <br />
+  内容：<textarea name="content" style="width: 300px;height: 400px"></textarea>
+  <br />
+  <input type="submit" />
+</form>
+
+{% endblock %}

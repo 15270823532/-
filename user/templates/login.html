@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit"/>
+<meta name="force-rendering" content="webkit"/>
+<title></title>
+<link type="text/css" rel="stylesheet" href="static/css/style.css" />
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+   var height=$(document).height();
+   $('body').css('height',height);
+   var mart=height-500;
+   mart = mart/2;
+   $('.loginBox').css('marginTop',mart);
+})
+</script>
+</head>
+
+<body>
+<div class="loginBox">
+  <h1>欢迎登陆</h1>
+  <form action="/user/login" method="POST">
+    <div class="item">
+      <div class="icon"><img src="static/images/icon1.png" /></div>
+      <div class="txt"><input name="username" type="text" placeholder="请输入您的用户名"/></div>
+    </div>
+    <div class="item"style="margin-top: 20px">
+      <div class="icon"><img src="static/images/icon2.png" /></div>
+      <div class="txt"><input name="password" type="password" placeholder="请输入您的密码"/></div>
+    </div>
+    <div class="item_3"style="margin-top: 40px">
+      <input name="" type="submit" value="安全登录" class="btn"/>
+    </div>
+  </form>
+  <div class="item_4">
+    还没有账号？<a href="/user/register">立即注册</a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+<!-- content -->
+{% block content %}
+<div style="float: left"><h2><font color="red">最新动态</font></h2></div> <div style="float: left;margin-top:20px;margin-left: 50px"><a href="/weibof/post"><input type="button" value="我要写文章"></a></div>
+
+<br>
+
+<br>
+<br>
+<hr>
+<ul>
+  {% for w in weibos %}
+  <li><a href="/weibof/read?aid={{ w.id }}">{{ w.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

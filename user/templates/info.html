@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="margin: auto">
+    <h1><font color="fuchsia">用户信息</font></h1>
+    <hr>
+    <ul>
+        <li>{{ user.username }}</li>
+        <li>{{ user.gender }}</li>
+        <li>{{ user.city }}</li>
+    </ul>
+</div>
+{% endblock %}
