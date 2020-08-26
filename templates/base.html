@@ -52,10 +52,14 @@
     <!-- 导航栏 -->
     <div class="nav">
       <a href="/">首页</a>
-      <a href="/weibof/post">发布文章</a>
+      <a href="/weibof/post">发微博</a>
+      {% if 'uid' in session %}
+      <div style="float: right;margin-right: 10px"><a href="/user/logout" >退出</a></div>
+      <div style="float: right;margin-right: 40px"><a href="/user/info" >个人信息</a></div>
+      {% else %}
       <div style="float: right;margin-right: 40px"><a href="/user/login" >登录</a></div>
       <div style="float: right;margin-right: 10px"><a href="/user/register" >注册</a></div>
-
+      {% endif %}
     <!-- 容器 -->
     <div class="container">
       <!-- 内容区 -->

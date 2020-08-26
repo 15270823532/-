@@ -4,6 +4,7 @@ from flask import redirect
 
 from user.models import User
 from libs.orm import db
+from libs.utils import login_required
 
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 user_bp.template_folder = './templates'
@@ -40,7 +41,7 @@ def login():
         if password and user.password==password:
             session['uid']=user.id
             session['username']=user.username
-            return redirect('/user/info')
+            return redirect('/weibof/display')
         else:
             return '密码错误'
     else:
@@ -48,7 +49,15 @@ def login():
 
 
 @user_bp.route('/info')
+@login_required
 def info():
     uid=session['uid']
     user=User.query.get(uid)
     return render_template('info.html',user=user)
+
+@user_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+
+

@@ -6,6 +6,7 @@ from flask import redirect
 
 from weibof.models import Weibo
 from libs.orm import db
+from libs.utils import login_required
 
 weibof_bp=Blueprint('weibof',__name__,url_prefix='/weibof')
 weibof_bp.template_folder='./templates'
@@ -18,6 +19,7 @@ def display():
     return render_template('display.html', weibos=weibos)
 
 @weibof_bp.route('/post', methods=("POST", "GET"))
+@login_required
 def post():
     if request.method=='POST':
         title=request.form.get('title')
@@ -42,8 +44,9 @@ def read():
 #     return render_template('alter.html')
 
 @weibof_bp.route('/delete')
+@login_required
 def delete():
     wid=int(request.args.get('wid'))
     Weibo.query.filter_by(id=wid).delete()
     db.session.commit()
-    return redirect('weibof/display')
+    return redirect('/weibof/display')
