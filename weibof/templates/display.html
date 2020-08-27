@@ -25,4 +25,34 @@
 <div><a href="/weibof/read?wid={{ w.id }}">{{ w.update_time }}</a></div>
 <hr>
 {% endfor %}
+<br>
+<div align="center">
+    {% if page !=1 %}
+    <span style="margin-right: 20px;">
+    <a href="/weibof/display?page={{ page-1 }}">上一页</a>
+    </span>
+    {% endif %}
+    {% for p in pages %}
+    {% if p==page %}
+    <span style="margin-right: 20px">{{ p }}</span>
+    {% else %}
+    <span style="margin-right: 20px">
+        <a href="/weibof/display?page={{ p }}">{{ p }}</a>
+    </span>
+    {% endif %}
+    {% endfor %}
+    {% if page == max_page %}
+    <span style="margin-right: 20px">
+    <a href="/weibof/display">返回首页</a>
+    </span>
+    {% else %}
+    <span style="margin-right: 20px">
+    <a href="/weibof/display?page={{ page+1 }}">下一页</a>
+    </span>
+    {% endif %}
+    <form action="/weibof/display" method="POST" style="float:right;color: fuchsia;padding-right: 60px">
+        跳转至<input type="text" size="5" name="NO" placeholder="输入数字">
+        <input type="submit" name="确定" value="确定">
+    </form>
+</div>
 {% endblock %}

@@ -1,4 +1,4 @@
-import datetime
+import datetime,math
 
 from flask import Blueprint, request, session
 from flask import render_template
@@ -13,12 +13,32 @@ weibof_bp.template_folder = './templates'
 weibof_bp.static_folder = './static'
 
 
-@weibof_bp.route('/display')
+@weibof_bp.route('/display', methods=("POST", "GET"))
 def display():
-    '''首页展示'''
-    page=int(request.args.get('page',1))
-    weibos = Weibo.query.order_by(Weibo.create_time.desc()).all()
-    return render_template('display.html', weibos=weibos)
+    # '''首页展示'''
+    if request.method == 'POST':
+        try:
+            NO=int(request.form.get('NO'))
+            return redirect(f'/weibof/display?page={NO}')
+        except Exception as e:
+            return abort(403)
+    else:
+        page = int(request.args.get('page', 1))
+        per_page = 30
+        offset = per_page * (page - 1)
+        weibos=Weibo.query.order_by(Weibo.update_time.desc()).limit(per_page).offset(offset)
+        # '''获取最大的页码'''
+        max_page=math.ceil(Weibo.query.count()/per_page)
+
+        if page<=3:
+            start,end=1,min(7,max_page)
+        elif page>(max_page-3):
+            start,end=max_page-6,max_page
+        else:
+            start=page-3
+            end=page+3
+        pages=range(start,end+1)
+        return render_template('display.html', weibos=weibos,pages=pages,page=page,max_page=max_page)
 
 
 @weibof_bp.route('/post', methods=("POST", "GET"))
