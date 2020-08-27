@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ weibo.author.username}}</h1>
+<hr />
+<p>
+  {{ weibo.content | replace('\n','<br>') | safe }}
+</p>
+<div>{{ weibo.create_time }}</div>
+<a href="/weibof/delete?wid={{ weibo.id }}"><button>删除微博</button></a>
+<a style="margin-left: 20px" href="/weibof/alter?wid={{ weibo.id }}"><button>修改微博</button></a>
+</body>
+</html>

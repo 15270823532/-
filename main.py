@@ -7,7 +7,8 @@ from flask_migrate import Migrate, MigrateCommand
 from libs.orm import db
 from user.views import user_bp
 from weibof.views import weibof_bp
-
+from user.models import User
+from weibof.models import Weibo
 app = Flask(__name__)
 app.secret_key = r'(*&^TRF@QSR^&*Ijhu*()OKJU*(87ytGHU7654rE43Wr5$#Er56&*())(*Ikl;[}+_)'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:lxl6291097@localhost:3306/weibo'
@@ -28,6 +29,13 @@ app.register_blueprint(weibof_bp)
 def home():
     return redirect('/weibof/display')
 #/weibof/display
+
+@manager.command
+def create_test_weibo():
+    users=User.fake_users(50)
+    id_list=[u.id for u in users]
+    Weibo.fake_weibo(id_list,5000)
+
 
 if __name__ == "__main__":
     manager.run()

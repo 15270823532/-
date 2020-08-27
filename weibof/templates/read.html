@@ -3,11 +3,19 @@
 <!-- content -->
 {% block content %}
 
-<h1>{{ weibo.title }}</h1>
-<hr />
+<h1>{{ weibo.author.username}}</h1>
+<hr/>
 <p>
-  {{ weibo.content }}
+    {{ weibo.content | replace('\n','<br>') | safe }}
 </p>
-
-<a href="/weibof/delete?wid={{ weibo.id }}"><button>删除文章</button></a>
+<div>{{ weibo.create_time }}</div>
+{% if weibo.uid == session['uid'] %}
+<a href="/weibof/delete?wid={{ weibo.id }}">
+    <button>删除微博</button>
+</a>
+<a style="margin-left: 20px" href="/weibof/alter?wid={{ weibo.id }}">
+    <button>修改微博</button>
+</a>
+{% endif %}
+<a style="margin-left: 20px" href="/weibof/display"><button>返回</button></a>
 {% endblock %}

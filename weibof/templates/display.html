@@ -2,7 +2,15 @@
 
 <!-- content -->
 {% block content %}
-<div style="float: left;height: 70px"><h2><font color="red">最新动态</font></h2></div> <div style="float: left;margin-top:20px;margin-left: 50px"><a href="/weibof/post"><input type="button" value="我要写微博"></a></div>
+<div style="float: left;height: 70px">
+    <h2><font color="red">
+    最新动态
+    </font></h2></div>
+<div style="float: left;margin-top:20px;margin-left: 50px">
+    <a href="/weibof/post">
+        <input type="button"value="我要写微博">
+    </a>
+</div>
 
 <br>
 
@@ -10,6 +18,11 @@
 <br>
 <hr>
 {% for w in weibos %}
-<div><a href="/weibof/read?wid={{ w.id }}">{{ w.title }}</a></div>
+<strong>{{ w.author.username }}</strong>发布:
+<br>
+{{ w.content | replace('\n','<br>') | safe }}
+<br>
+<div><a href="/weibof/read?wid={{ w.id }}">{{ w.update_time }}</a></div>
+<hr>
 {% endfor %}
 {% endblock %}

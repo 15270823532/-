@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+<!-- content -->
+{% block content %}
+{% if err %}
+<div style="color: red;font-size: large">{{ err }}</div>
+{% enif %}
+<form action="/weibof/post" method="POST">
+    <br/>
+    <div>微博内容</div>
+    <textarea name="content" style="width: 400px;height: 300px">
+      {{ weibo.content }}
+    </textarea>
+    <br/>
+    <input type="hidden" name="wid" value="{{ weibo.id }}">
+    <br/>
+    <input type="submit" value="修改微博"/>
+</form>
+
+{% endblock %}
